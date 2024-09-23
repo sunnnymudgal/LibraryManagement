@@ -30,15 +30,14 @@ public class HomePageController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-
-
-    @PostMapping
-    public ResponseEntity<?> addStudents(@RequestBody Students studentInfo){
-        try{
-            studentsService.saveInfo((studentInfo));
-            return new ResponseEntity<>(studentInfo,HttpStatus.CREATED);
-        }catch (Exception e){
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    @PostMapping("/register-process")
+    public ResponseEntity<?> registerStudent(@ModelAttribute("student") Students student) {
+        try {
+            studentsService.saveInfo(student);  // Save student info
+            return ResponseEntity.status(HttpStatus.CREATED).body("Registration successful");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body("Registration failed: " + e.getMessage());
         }
     }
 

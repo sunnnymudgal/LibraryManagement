@@ -6,7 +6,7 @@
 </head>
 <body>
 
-
+<a href="/register" >Register a Student in Library</a>
 
 </body>
 </html>

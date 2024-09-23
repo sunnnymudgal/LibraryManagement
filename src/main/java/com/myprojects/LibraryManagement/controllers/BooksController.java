@@ -36,15 +36,16 @@ public class BooksController {
     }
 
     @PostMapping("/{name}")
-    public ResponseEntity<?> create(@RequestBody Books books, @PathVariable String name){
+    public ResponseEntity<?> create(@ModelAttribute Books books, @PathVariable String name) {
         Students student = studentsService.findByStudentName(name);
-        try{
-            booksService.saveInfo(books,name);
-            return new ResponseEntity<>(books,HttpStatus.CREATED);
-        }catch (Exception e){
+        try {
+            booksService.saveInfo(books, name);
+            return new ResponseEntity<>(books, HttpStatus.CREATED);
+        } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
+
 
     @DeleteMapping("id/{name}/{myId}")
     public ResponseEntity<?> deleteBookInfoById(@PathVariable String myId,@PathVariable String name){
